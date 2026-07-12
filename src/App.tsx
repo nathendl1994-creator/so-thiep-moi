@@ -519,9 +519,9 @@ export default function App() {
                     setActiveTab(tab.id as any);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className={`flex-1 py-2 rounded-full flex flex-col items-center justify-center gap-1 cursor-pointer transition-all duration-300 relative ${
+                  className={`flex-1 py-1.5 rounded-full flex flex-col items-center justify-center gap-0.5 cursor-pointer transition-all duration-300 relative ${
                     isActive 
-                      ? `${style.activeLightText} ${style.activeDarkText} font-display font-extrabold scale-105` 
+                      ? `${style.activeLightText} ${style.activeDarkText} font-display font-extrabold scale-102` 
                       : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
                   }`}
                 >
@@ -532,8 +532,10 @@ export default function App() {
                       transition={{ type: "spring", stiffness: 350, damping: 28 }}
                     />
                   )}
-                  <Icon className={`w-4 h-4 z-10 ${isActive ? `${style.activeIcon} stroke-[2.5px]` : 'stroke-[1.8px]'}`} />
-                  <span className="text-[8px] uppercase tracking-wider font-display z-10">{tab.label}</span>
+                  <Icon className={`w-3.5 h-3.5 z-10 ${isActive ? `${style.activeIcon} stroke-[2.5px]` : 'stroke-[1.8px]'}`} />
+                  <span className="text-[7.5px] min-[375px]:text-[8px] leading-tight text-center uppercase tracking-normal min-[375px]:tracking-wider font-display z-10 w-full px-0.5 block break-words">
+                    {tab.label}
+                  </span>
                 </button>
               );
             })}

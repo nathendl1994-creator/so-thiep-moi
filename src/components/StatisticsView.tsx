@@ -250,7 +250,7 @@ export default function StatisticsView({ data }: StatisticsViewProps) {
       {/* MONTHLY BAR CHART WITH MONTH TABS AND ROUNDED STYLING */}
       <div className="bg-indigo-50/50 dark:bg-indigo-950/20 p-6 rounded-3xl border border-indigo-200/50 dark:border-indigo-900/30 shadow-xs space-y-4 animate-in fade-in duration-300">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-indigo-200/20 dark:border-indigo-900/10 pb-3 text-center sm:text-left">
-          <h3 className="text-xs font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-widest flex items-center gap-1.5 justify-center sm:justify-start">
+          <h3 className="text-xs font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-widest flex items-center gap-1.5 justify-center sm:justify-start text-center sm:text-left w-full sm:w-auto">
             <BarChart2 className="w-4 h-4 text-indigo-500 animate-pulse" />
             Biến động tiền mừng năm {selectedYear}
           </h3>
@@ -346,7 +346,7 @@ export default function StatisticsView({ data }: StatisticsViewProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Spending by Event Type */}
         <div className="bg-pink-50/50 dark:bg-pink-950/20 p-6 rounded-3xl border border-pink-200/50 dark:border-pink-900/30 shadow-xs space-y-4">
-          <h3 className="text-xs font-black text-pink-600 dark:text-pink-400 uppercase tracking-widest flex items-center gap-1.5 justify-center sm:justify-start">
+          <h3 className="text-xs font-black text-pink-600 dark:text-pink-400 uppercase tracking-widest flex items-center gap-1.5 justify-center sm:justify-start text-center sm:text-left w-full sm:w-auto">
             <PieIcon className="w-4 h-4 text-pink-500" />
             Chi tiêu theo loại sự kiện
           </h3>
@@ -375,7 +375,7 @@ export default function StatisticsView({ data }: StatisticsViewProps) {
 
         {/* Spending by Relationship */}
         <div className="bg-teal-50/50 dark:bg-teal-950/20 p-6 rounded-3xl border border-teal-200/50 dark:border-teal-900/30 shadow-xs space-y-4">
-          <h3 className="text-xs font-black text-teal-600 dark:text-teal-400 uppercase tracking-widest flex items-center gap-1.5 justify-center sm:justify-start">
+          <h3 className="text-xs font-black text-teal-600 dark:text-teal-400 uppercase tracking-widest flex items-center gap-1.5 justify-center sm:justify-start text-center sm:text-left w-full sm:w-auto">
             <Users className="w-4 h-4 text-teal-500" />
             Chi tiêu theo mối quan hệ
           </h3>
@@ -405,7 +405,7 @@ export default function StatisticsView({ data }: StatisticsViewProps) {
 
       {/* TOP GIVERS LEADERBOARD */}
       <div className="bg-emerald-50/50 dark:bg-emerald-950/20 p-6 rounded-3xl border border-emerald-200/50 dark:border-emerald-900/30 shadow-xs space-y-4">
-        <h3 className="text-xs font-black text-emerald-600 dark:text-emerald-450 uppercase tracking-widest flex items-center gap-1.5 justify-center sm:justify-start">
+        <h3 className="text-xs font-black text-emerald-600 dark:text-emerald-450 uppercase tracking-widest flex items-center gap-1.5 justify-center sm:justify-start text-center sm:text-left w-full sm:w-auto">
           <Award className="w-4 h-4 text-emerald-500" />
           Những người đã mừng nhiều nhất (Top khách quý)
         </h3>
@@ -436,7 +436,7 @@ export default function StatisticsView({ data }: StatisticsViewProps) {
       {/* LIST OF OUTSTANDING RETURNS */}
       {outstandingGifts.length > 0 && (
         <div className="bg-rose-50/50 dark:bg-rose-950/20 p-6 rounded-3xl border border-rose-200/50 dark:border-rose-900/30 shadow-xs space-y-4">
-          <h3 className="text-xs font-black text-rose-600 dark:text-rose-400 uppercase tracking-widest flex items-center gap-1.5 justify-center sm:justify-start">
+          <h3 className="text-xs font-black text-rose-600 dark:text-rose-400 uppercase tracking-widest flex items-center gap-1.5 justify-center sm:justify-start text-center sm:text-left w-full sm:w-auto">
             <AlertTriangle className="w-4 h-4 text-rose-500" />
             Các khoản chưa mừng lại ({outstandingGifts.length})
           </h3>
