@@ -311,7 +311,6 @@ html:not(.dark) main :is(.bg-white, .bg-slate-50):not(.bg-rose-500):not(.bg-emer
 }
 
 /* Specific main heading size and weight adjustments for premium typography hierarchy */
-html:not(.dark) h1,
 html:not(.dark) .h1-primary {
   font-weight: 700 !important;
   font-size: 30px !important;
@@ -320,7 +319,6 @@ html:not(.dark) .h1-primary {
   margin-bottom: 0.75rem !important;
 }
 
-html:not(.dark) h2,
 html:not(.dark) .h2-screen {
   font-weight: 600 !important;
   font-size: 23px !important;
@@ -329,7 +327,6 @@ html:not(.dark) .h2-screen {
   margin-bottom: 0.5rem !important;
 }
 
-html:not(.dark) h3,
 html:not(.dark) .card-title {
   font-weight: 700 !important;
   font-size: 19px !important;
@@ -338,7 +335,6 @@ html:not(.dark) .card-title {
   margin-bottom: 0.5rem !important;
 }
 
-html:not(.dark) h4,
 html:not(.dark) .section-title {
   font-weight: 600 !important;
   font-size: 17px !important;

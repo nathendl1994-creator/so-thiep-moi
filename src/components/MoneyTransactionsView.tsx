@@ -359,12 +359,12 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
 
           {/* Social Reciprocity Warnings Box (Only on 'received' tab) */}
           {activeTab === 'received' && unreciprocatedGivers.length > 0 && (
-            <div className="bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/50 dark:border-amber-900/60 rounded-2xl p-5 space-y-3 shadow-sm">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">
+            <div className="bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/50 dark:border-amber-900/60 rounded-3xl p-5 space-y-3 shadow-sm">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 justify-center">
                 <AlertTriangle className="w-4 h-4 animate-bounce" />
-                <span>Cảnh báo xã giao: Chưa mừng lại ({unreciprocatedGivers.length})</span>
+                <span className="text-center">Cảnh báo xã giao: Chưa mừng lại ({unreciprocatedGivers.length})</span>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
+              <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold text-center">
                 Những người sau đây đã từng mừng tiền sự kiện cho bạn, nhưng bạn chưa có ghi nhận đã đi mừng lại họ. Hãy lưu ý khi họ có tiệc mừng!
               </p>
               <div className="max-h-36 overflow-y-auto space-y-2 pr-1">
@@ -374,7 +374,7 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
                     onClick={() => {
                       setSearchTerm(contact.fullName);
                     }}
-                    className="flex justify-between items-center p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer hover:border-amber-400 transition-all text-xs"
+                    className="flex justify-between items-center p-3 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer hover:border-amber-400 transition-all text-xs"
                   >
                     <div>
                       <strong className="text-slate-800 dark:text-slate-100 font-black">{contact.fullName}</strong>
@@ -413,7 +413,7 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
               placeholder="Tìm kiếm người mừng, ghi chú..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 text-xs rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm focus:outline-hidden focus:ring-2 focus:ring-rose-500/10 focus:border-rose-500 text-slate-700 dark:text-slate-200 font-medium"
+              className="w-full pl-10 pr-4 py-3 text-xs rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm focus:outline-hidden focus:ring-2 focus:ring-rose-500/10 focus:border-rose-500 text-slate-700 dark:text-slate-200 font-medium"
             />
           </div>
 
@@ -422,7 +422,7 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
             <select
               value={filterMethod}
               onChange={(e) => setFilterMethod(e.target.value as PaymentMethod | 'all')}
-              className="flex-1 p-2.5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-750 dark:text-slate-300 focus:outline-hidden text-xs font-semibold"
+              className="flex-1 p-2.5 px-4 bg-white dark:bg-slate-900 rounded-full border border-slate-200 dark:border-slate-800 text-slate-750 dark:text-slate-300 focus:outline-hidden text-xs font-semibold text-center cursor-pointer"
             >
               <option value="all">Mọi hình thức</option>
               <option value="cash">Tiền mặt</option>
@@ -431,7 +431,7 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
             <select
               value={filterMember}
               onChange={(e) => setFilterMember(e.target.value)}
-              className="flex-1 p-2.5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-750 dark:text-slate-300 focus:outline-hidden text-xs font-semibold"
+              className="flex-1 p-2.5 px-4 bg-white dark:bg-slate-900 rounded-full border border-slate-200 dark:border-slate-800 text-slate-750 dark:text-slate-300 focus:outline-hidden text-xs font-semibold text-center cursor-pointer"
             >
               <option value="all">Mọi thành viên đi</option>
               {familyMembers.map(fm => (
@@ -449,11 +449,11 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
                 return (
                   <div
                     key={tx.id}
-                    className="p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl flex justify-between items-start gap-4 hover:border-rose-400 dark:hover:border-rose-900 shadow-sm transition-all"
+                    className="p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl flex justify-between items-start gap-4 hover:border-rose-400 dark:hover:border-rose-900 shadow-sm transition-all"
                   >
                     <div className="space-y-1.5 min-w-0">
-                      <div className="flex items-center gap-1.5">
-                        <span className={`p-1 rounded-lg ${
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <span className={`p-1 rounded-full ${
                           tx.transactionType === 'given'
                             ? 'bg-rose-50 dark:bg-rose-950/30 text-rose-600'
                             : 'bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600'
@@ -464,7 +464,7 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
                             <ArrowDownLeft className="w-3.5 h-3.5" />
                           )}
                         </span>
-                        <span className="text-[10px] bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-300 px-2 py-0.5 rounded-sm font-semibold">
+                        <span className="text-[10px] bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-300 px-2.5 py-0.5 rounded-full font-semibold">
                           {tx.paymentMethod === 'cash' ? 'Tiền mặt' : 'Chuyển khoản'}
                         </span>
                         <span className="text-[10px] text-slate-400 font-medium">
@@ -480,7 +480,7 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
                         <p className="text-[11px] text-slate-400 font-medium">SĐT: {contact.phone}</p>
                       )}
 
-                      <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 bg-slate-50/50 dark:bg-slate-950/40 p-2.5 rounded-xl font-medium">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 bg-slate-50/50 dark:bg-slate-950/40 p-2.5 rounded-2xl font-medium">
                         {tx.note}
                       </p>
 
@@ -503,7 +503,7 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
                           alt="Chứng từ"
                           referrerPolicy="no-referrer"
                           loading="lazy"
-                          className="w-12 h-12 object-cover rounded-xl border border-slate-200 dark:border-slate-700 cursor-pointer shadow-xs"
+                          className="w-12 h-12 object-cover rounded-2xl border border-slate-200 dark:border-slate-700 cursor-pointer shadow-xs"
                           onClick={() => {
                             // simple modal-like zoom
                             alert('Bấm vào chứng từ để xem kích thước lớn.');
@@ -514,13 +514,13 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
                       <div className="flex gap-1.5">
                         <button
                           onClick={() => handleOpenEdit(tx)}
-                          className="p-1.5 bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-750 rounded-xl cursor-pointer transition-all"
+                          className="p-1.5 bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-750 rounded-full cursor-pointer transition-all"
                         >
                           <Edit className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => handleDelete(tx.id)}
-                          className="p-1.5 bg-rose-50 dark:bg-rose-950/20 text-rose-600 hover:bg-rose-100 rounded-xl cursor-pointer transition-all"
+                          className="p-1.5 bg-rose-50 dark:bg-rose-950/20 text-rose-600 hover:bg-rose-100 rounded-full cursor-pointer transition-all"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
@@ -544,15 +544,15 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
               )}
             </div>
           ) : (
-            <div className="p-12 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div className="p-12 text-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col items-center justify-center">
               <DollarSign className="w-12 h-12 text-slate-300 mx-auto mb-2" />
-              <p className="text-xs text-slate-400 font-semibold">Chưa có giao dịch nào được ghi chép.</p>
+              <p className="text-xs text-slate-400 font-semibold text-center">Chưa có giao dịch nào được ghi chép.</p>
             </div>
           )}
         </>
       ) : (
         /* TRANSACTION ADD/EDIT FORM */
-        <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+        <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
           <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
             <h3 className="text-base font-bold text-slate-800 dark:text-slate-100 flex items-center gap-1.5">
               <span className={`w-1 h-4 rounded-full ${activeTab === 'given' ? 'bg-rose-500' : 'bg-emerald-500'}`}></span>
@@ -560,7 +560,7 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
             </h3>
             <button
               onClick={() => setIsFormOpen(false)}
-              className="p-1.5 bg-slate-50 dark:bg-slate-800 rounded-xl hover:bg-slate-150 dark:hover:bg-slate-700 text-slate-400 cursor-pointer"
+              className="p-1.5 bg-slate-50 dark:bg-slate-800 rounded-full hover:bg-slate-150 dark:hover:bg-slate-700 text-slate-400 cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
