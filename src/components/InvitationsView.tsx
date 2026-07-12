@@ -151,6 +151,23 @@ export default function InvitationsView({
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
 
+  // Active pagination
+  const [visibleCount, setVisibleCount] = useState(10);
+
+  // Cleanup camera stream on unmount
+  useEffect(() => {
+    return () => {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+      }
+    };
+  }, []);
+
+  // Reset pagination when search/filters change
+  useEffect(() => {
+    setVisibleCount(10);
+  }, [searchTerm, filterType, filterStatus, filterRel, sortBy]);
+
   // Trigger from Dashboard Quick-Add or View
   useEffect(() => {
     if (quickAddType) {
@@ -238,13 +255,46 @@ export default function InvitationsView({
     setIsFormOpen(true);
   };
 
-  // Image Upload / Camera handlers
+  // Image Upload / Camera handlers with quality & dimension compression (Max 1280px, under 200KB)
+  const compressAndSetImage = (base64Str: string) => {
+    const img = new Image();
+    img.onload = () => {
+      const maxDim = 1280;
+      let width = img.width;
+      let height = img.height;
+      if (width > maxDim || height > maxDim) {
+        if (width > height) {
+          height = Math.round((height * maxDim) / width);
+          width = maxDim;
+        } else {
+          width = Math.round((width * maxDim) / height);
+          height = maxDim;
+        }
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.drawImage(img, 0, 0, width, height);
+        const compressed = canvas.toDataURL('image/jpeg', 0.5);
+        setInvitationImage(compressed);
+      } else {
+        setInvitationImage(base64Str);
+      }
+    };
+    img.onerror = () => {
+      setInvitationImage(base64Str);
+    };
+    img.src = base64Str;
+  };
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setInvitationImage(reader.result as string);
+        compressAndSetImage(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
@@ -277,13 +327,24 @@ export default function InvitationsView({
   const capturePhoto = () => {
     if (videoRef.current) {
       const canvas = document.createElement('canvas');
-      canvas.width = videoRef.current.videoWidth;
-      canvas.height = videoRef.current.videoHeight;
+      const maxDim = 1280;
+      let width = videoRef.current.videoWidth;
+      let height = videoRef.current.videoHeight;
+      if (width > maxDim || height > maxDim) {
+        if (width > height) {
+          height = Math.round((height * maxDim) / width);
+          width = maxDim;
+        } else {
+          width = Math.round((width * maxDim) / height);
+          height = maxDim;
+        }
+      }
+      canvas.width = width;
+      canvas.height = height;
       const ctx = canvas.getContext('2d');
       if (ctx) {
-        ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-        // Compress quality slightly to save localStorage
-        const dataUrl = canvas.toDataURL('image/jpeg', 0.6);
+        ctx.drawImage(videoRef.current, 0, 0, width, height);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.5);
         setInvitationImage(dataUrl);
         stopCamera();
       }
@@ -600,7 +661,7 @@ export default function InvitationsView({
           {/* Invitation Cards using modular CardItem */}
           {filteredInvitations.length > 0 ? (
             <div className="space-y-3.5">
-              {filteredInvitations.map((inv, index) => {
+              {filteredInvitations.slice(0, visibleCount).map((inv, index) => {
                 const contact = contacts.find(c => c.id === inv.contactId);
                 
                 // Define representative icon
@@ -621,10 +682,11 @@ export default function InvitationsView({
                         src={inv.invitationImage}
                         alt="Thiệp"
                         referrerPolicy="no-referrer"
+                        loading="lazy"
                         className="w-11 h-11 object-cover rounded-2xl border border-white/40 shadow-xs"
                       />
                     ) : (
-                      <CardIcon className="w-5 h-5 animate-pulse" />
+                      <CardIcon className="w-5 h-5" />
                     )}
                     title={inv.eventName}
                     description={`${contact?.fullName || 'Người mời'} • ${EVENT_TYPE_LABELS[inv.eventType]} • ${inv.location}`}
@@ -634,6 +696,19 @@ export default function InvitationsView({
                   />
                 );
               })}
+
+              {/* Pagination controls */}
+              {filteredInvitations.length > visibleCount && (
+                <div className="flex justify-center pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setVisibleCount(prev => prev + 10)}
+                    className="px-6 py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-850 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-semibold rounded-full transition-all cursor-pointer shadow-xs border border-slate-200/50 dark:border-white/5"
+                  >
+                    Xem thêm thiệp mời ({filteredInvitations.length - visibleCount} thiệp khác)
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             <div className="p-12 text-center bg-[#F6F5EE]/40 dark:bg-slate-900 rounded-[24px] border border-slate-200/60 dark:border-slate-800/60 shadow-xs">
@@ -950,6 +1025,7 @@ export default function InvitationsView({
                         src={invitationImage}
                         alt="Preview"
                         referrerPolicy="no-referrer"
+                        loading="lazy"
                         className="w-24 h-24 object-cover rounded-lg border border-slate-200 dark:border-slate-700"
                       />
                       <button

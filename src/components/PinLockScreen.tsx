@@ -25,6 +25,15 @@ export default function PinLockScreen({
   const [confirmPin, setConfirmPin] = useState<string>('');
   const [step, setStep] = useState<1 | 2>(1); // Step 1: Nhập PIN mới, Step 2: Xác nhận PIN mới (dùng khi cài đặt)
   const [error, setError] = useState<string>('');
+  const timeoutRef = React.useRef<any>(null);
+
+  React.useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleNumberClick = (num: number) => {
     if (error) setError('');
@@ -38,7 +47,7 @@ export default function PinLockScreen({
         if (nextPin === correctPin) {
           onSuccess();
         } else {
-          setTimeout(() => {
+          timeoutRef.current = setTimeout(() => {
             setError('Mã PIN không chính xác. Vui lòng thử lại.');
             setPin('');
           }, 300);

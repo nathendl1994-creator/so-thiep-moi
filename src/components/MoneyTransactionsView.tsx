@@ -46,6 +46,14 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
   const [filterMethod, setFilterMethod] = useState<PaymentMethod | 'all'>('all');
   const [filterMember, setFilterMember] = useState<string>('all');
 
+  // Active pagination
+  const [visibleCount, setVisibleCount] = useState(10);
+
+  // Reset pagination when active tab/search/filters change
+  useEffect(() => {
+    setVisibleCount(10);
+  }, [activeTab, searchTerm, filterMethod, filterMember]);
+
   // Form State
   const [contactName, setContactName] = useState('');
   const [contactPhone, setContactPhone] = useState('');
@@ -155,13 +163,46 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
     setIsFormOpen(true);
   };
 
-  // Upload/Camera Handler
+  // Upload/Camera Handler with compression (Max 1280px, quality 0.5, JPEG)
+  const compressAndSetImage = (base64Str: string) => {
+    const img = new Image();
+    img.onload = () => {
+      const maxDim = 1280;
+      let width = img.width;
+      let height = img.height;
+      if (width > maxDim || height > maxDim) {
+        if (width > height) {
+          height = Math.round((height * maxDim) / width);
+          width = maxDim;
+        } else {
+          width = Math.round((width * maxDim) / height);
+          height = maxDim;
+        }
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.drawImage(img, 0, 0, width, height);
+        const compressed = canvas.toDataURL('image/jpeg', 0.5);
+        setImage(compressed);
+      } else {
+        setImage(base64Str);
+      }
+    };
+    img.onerror = () => {
+      setImage(base64Str);
+    };
+    img.src = base64Str;
+  };
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImage(reader.result as string);
+        compressAndSetImage(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
@@ -287,16 +328,16 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
       {!isFormOpen ? (
         <>
           {/* Tabs */}
-          <div className="grid grid-cols-2 gap-2 bg-slate-100 dark:bg-slate-900 p-1 rounded-full border border-slate-200 dark:border-slate-800">
+          <div className="grid grid-cols-2 gap-2 bg-slate-100/65 dark:bg-slate-950/35 p-1 rounded-full border border-slate-200/50 dark:border-white/5 backdrop-blur-md">
             <button
               onClick={() => {
                 setActiveTab('given');
                 setSearchTerm('');
               }}
-              className={`py-2.5 rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+              className={`py-2.5 rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer border ${
                 activeTab === 'given'
-                  ? 'bg-white dark:bg-slate-800 text-rose-500 shadow-sm'
-                  : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-300'
+                  ? 'bg-rose-100 dark:bg-rose-950/40 text-rose-900 dark:text-rose-300 border-rose-200 dark:border-rose-900/40 shadow-xs font-extrabold'
+                  : 'bg-transparent border-transparent text-slate-500 dark:text-slate-450 hover:text-rose-750 dark:hover:text-rose-300 hover:bg-rose-50/50 dark:hover:bg-rose-950/10'
               }`}
             >
               <ArrowUpRight className="w-4 h-4" /> Tiền đã đi mừng
@@ -306,10 +347,10 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
                 setActiveTab('received');
                 setSearchTerm('');
               }}
-              className={`py-2.5 rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+              className={`py-2.5 rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer border ${
                 activeTab === 'received'
-                  ? 'bg-white dark:bg-slate-800 text-emerald-500 shadow-sm'
-                  : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-300'
+                  ? 'bg-emerald-100 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-300 border-emerald-200 dark:border-emerald-900/40 shadow-xs font-extrabold'
+                  : 'bg-transparent border-transparent text-slate-500 dark:text-slate-450 hover:text-emerald-750 dark:hover:text-emerald-300 hover:bg-emerald-50/50 dark:hover:bg-emerald-950/10'
               }`}
             >
               <ArrowDownLeft className="w-4 h-4" /> Tiền đã nhận
@@ -402,7 +443,7 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
           {/* Transactions List */}
           {filteredTransactions.length > 0 ? (
             <div className="space-y-3">
-              {filteredTransactions.map(tx => {
+              {filteredTransactions.slice(0, visibleCount).map(tx => {
                 const contact = contacts.find(c => c.id === tx.contactId);
                 const familyMember = familyMembers.find(f => f.id === tx.familyMemberId);
                 return (
@@ -461,6 +502,7 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
                           src={tx.image}
                           alt="Chứng từ"
                           referrerPolicy="no-referrer"
+                          loading="lazy"
                           className="w-12 h-12 object-cover rounded-xl border border-slate-200 dark:border-slate-700 cursor-pointer shadow-xs"
                           onClick={() => {
                             // simple modal-like zoom
@@ -487,6 +529,19 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
                   </div>
                 );
               })}
+
+              {/* Pagination controls */}
+              {filteredTransactions.length > visibleCount && (
+                <div className="flex justify-center pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setVisibleCount(prev => prev + 10)}
+                    className="px-6 py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold rounded-full transition-all cursor-pointer shadow-xs border border-slate-200/50 dark:border-white/5"
+                  >
+                    Xem thêm giao dịch ({filteredTransactions.length - visibleCount} khoản khác)
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             <div className="p-12 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -669,6 +724,7 @@ export default function MoneyTransactionsView({ data, onDataChange }: MoneyTrans
                     src={image}
                     alt="Preview"
                     referrerPolicy="no-referrer"
+                    loading="lazy"
                     className="w-24 h-24 object-cover rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm"
                   />
                   <button

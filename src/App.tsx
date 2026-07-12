@@ -31,6 +31,71 @@ import SettingsView from './components/SettingsView';
 import PinLockScreen from './components/PinLockScreen';
 import { motion, AnimatePresence } from 'motion/react';
 
+const tabPastelStyles: Record<string, {
+  activeLightBg: string;
+  activeDarkBg: string;
+  activeLightText: string;
+  activeDarkText: string;
+  activeIcon: string;
+  activeBorderLight: string;
+  activeBorderDark: string;
+}> = {
+  dashboard: {
+    activeLightBg: 'bg-amber-100/90',
+    activeDarkBg: 'dark:bg-amber-950/45',
+    activeLightText: 'text-amber-900',
+    activeDarkText: 'dark:text-amber-300',
+    activeIcon: 'text-amber-600 dark:text-amber-400',
+    activeBorderLight: 'border-amber-200/80',
+    activeBorderDark: 'dark:border-amber-800/40'
+  },
+  invitations: {
+    activeLightBg: 'bg-rose-100/90',
+    activeDarkBg: 'dark:bg-rose-950/45',
+    activeLightText: 'text-rose-900',
+    activeDarkText: 'dark:text-rose-300',
+    activeIcon: 'text-rose-600 dark:text-rose-400',
+    activeBorderLight: 'border-rose-200/80',
+    activeBorderDark: 'dark:border-rose-800/40'
+  },
+  calendar: {
+    activeLightBg: 'bg-purple-100/90',
+    activeDarkBg: 'dark:bg-purple-950/45',
+    activeLightText: 'text-purple-900',
+    activeDarkText: 'dark:text-purple-300',
+    activeIcon: 'text-purple-600 dark:text-purple-400',
+    activeBorderLight: 'border-purple-200/80',
+    activeBorderDark: 'dark:border-purple-800/40'
+  },
+  transactions: {
+    activeLightBg: 'bg-emerald-100/90',
+    activeDarkBg: 'dark:bg-emerald-950/45',
+    activeLightText: 'text-emerald-900',
+    activeDarkText: 'dark:text-emerald-300',
+    activeIcon: 'text-emerald-600 dark:text-emerald-400',
+    activeBorderLight: 'border-emerald-200/80',
+    activeBorderDark: 'dark:border-emerald-800/40'
+  },
+  statistics: {
+    activeLightBg: 'bg-blue-100/90',
+    activeDarkBg: 'dark:bg-blue-950/45',
+    activeLightText: 'text-blue-900',
+    activeDarkText: 'dark:text-blue-300',
+    activeIcon: 'text-blue-600 dark:text-blue-400',
+    activeBorderLight: 'border-blue-200/80',
+    activeBorderDark: 'dark:border-blue-800/40'
+  },
+  settings: {
+    activeLightBg: 'bg-teal-100/90',
+    activeDarkBg: 'dark:bg-teal-950/45',
+    activeLightText: 'text-teal-900',
+    activeDarkText: 'dark:text-teal-300',
+    activeIcon: 'text-teal-600 dark:text-teal-400',
+    activeBorderLight: 'border-teal-200/80',
+    activeBorderDark: 'dark:border-teal-800/40'
+  }
+};
+
 export default function App() {
   const [data, setData] = useState<AppData | null>(null);
   const [activeTab, setActiveTab] = useState<'dashboard' | 'invitations' | 'calendar' | 'transactions' | 'statistics' | 'settings'>('dashboard');
@@ -255,6 +320,7 @@ export default function App() {
               ].map(tab => {
                 const Icon = tab.icon;
                 const isActive = activeTab === tab.id;
+                const style = tabPastelStyles[tab.id] || tabPastelStyles.dashboard;
                 return (
                   <button
                     key={tab.id}
@@ -263,19 +329,19 @@ export default function App() {
                     }}
                     className={`w-full flex items-center justify-between px-4 py-2.5 text-xs font-display font-bold tracking-wide rounded-full transition-all duration-300 cursor-pointer relative ${
                       isActive
-                        ? 'text-amber-700 dark:text-amber-400 font-extrabold'
+                        ? `${style.activeLightText} ${style.activeDarkText} font-extrabold`
                         : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
                     }`}
                   >
                     {isActive && (
                       <motion.div
                         layoutId="activeSidebarTab"
-                        className="absolute inset-0 glass-card border border-amber-500/25 shadow-sm -z-10 rounded-full"
+                        className={`absolute inset-0 border shadow-xs -z-10 rounded-full ${style.activeLightBg} ${style.activeDarkBg} ${style.activeBorderLight} ${style.activeBorderDark}`}
                         transition={{ type: "spring", stiffness: 350, damping: 28 }}
                       />
                     )}
                     <div className="flex items-center gap-3">
-                      <Icon className={`w-4 h-4 ${isActive ? 'text-amber-500' : 'opacity-75'}`} />
+                      <Icon className={`w-4 h-4 ${isActive ? style.activeIcon : 'opacity-75'}`} />
                       <span>{tab.label}</span>
                     </div>
                     {tab.badge && tab.badge > 0 ? (
@@ -445,6 +511,7 @@ export default function App() {
             ].map(tab => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
+              const style = tabPastelStyles[tab.id] || tabPastelStyles.dashboard;
               return (
                 <button
                   key={tab.id}
@@ -454,18 +521,18 @@ export default function App() {
                   }}
                   className={`flex-1 py-2 rounded-full flex flex-col items-center justify-center gap-1 cursor-pointer transition-all duration-300 relative ${
                     isActive 
-                      ? 'text-amber-600 dark:text-amber-400 font-display font-extrabold scale-105' 
+                      ? `${style.activeLightText} ${style.activeDarkText} font-display font-extrabold scale-105` 
                       : 'text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
                   }`}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="activeMobileTab"
-                      className="absolute inset-0 bg-amber-500/10 dark:bg-amber-400/10 rounded-full"
+                      className={`absolute inset-0 rounded-full border border-transparent/10 ${style.activeLightBg} ${style.activeDarkBg}`}
                       transition={{ type: "spring", stiffness: 350, damping: 28 }}
                     />
                   )}
-                  <Icon className={`w-4 h-4 z-10 ${isActive ? 'stroke-[2.5px]' : 'stroke-[1.8px]'}`} />
+                  <Icon className={`w-4 h-4 z-10 ${isActive ? `${style.activeIcon} stroke-[2.5px]` : 'stroke-[1.8px]'}`} />
                   <span className="text-[8px] uppercase tracking-wider font-display z-10">{tab.label}</span>
                 </button>
               );
