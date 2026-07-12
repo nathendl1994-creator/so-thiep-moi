@@ -1,0 +1,17 @@
+{
+  "short_name": "Sổ Thiệp Mời",
+  "name": "Sổ Thiệp Mời - Sổ sách & Lịch sự kiện gia đình",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3656/3656844.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "background_color": "#fff1f2",
+  "theme_color": "#f43f5e",
+  "display": "standalone",
+  "orientation": "portrait"
+}

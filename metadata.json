@@ -1,0 +1,6 @@
+{
+  "name": "Sổ Thiệp Mời",
+  "description": "Ứng dụng quản lý tiền mừng cưới, đám hỏi, sinh nhật, đầy tháng, tân gia và nhắc lịch sự kiện thiệp mời tối ưu cho điện thoại.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
