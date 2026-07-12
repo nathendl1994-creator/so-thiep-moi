@@ -186,7 +186,7 @@ export default function StatisticsView({ data }: StatisticsViewProps) {
 
   return (
     <div className="space-y-6 pb-20 select-none">
-      <div className="flex justify-between items-center bg-slate-50 dark:bg-slate-950 sticky top-0 py-3 z-10">
+      <div className="flex justify-between items-center bg-slate-50/20 dark:bg-slate-950/20 backdrop-blur-xs sticky top-0 py-3 z-10">
         <h2 className="text-sm font-black text-slate-400 uppercase tracking-widest">Báo Cáo Thống Kê</h2>
         
         {/* Year Selector */}
@@ -194,7 +194,7 @@ export default function StatisticsView({ data }: StatisticsViewProps) {
           <select
             value={selectedYear}
             onChange={(e) => setSelectedYear(Number(e.target.value))}
-            className="p-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-black text-slate-700 dark:text-slate-200 focus:outline-hidden cursor-pointer shadow-sm"
+            className="p-2.5 bg-blue-50/50 dark:bg-blue-950/35 border border-blue-200/50 dark:border-blue-900/40 rounded-xl text-xs font-black text-blue-900 dark:text-blue-300 focus:outline-hidden cursor-pointer shadow-xs"
           >
             <option value={2026}>Năm 2026</option>
             <option value={2025}>Năm 2025</option>
@@ -206,56 +206,56 @@ export default function StatisticsView({ data }: StatisticsViewProps) {
       {/* KPI Counters */}
       <div className="grid grid-cols-2 gap-4">
         {/* Balance Card */}
-        <div className="col-span-2 p-6 bg-slate-900 text-white rounded-2xl border border-slate-800 shadow-sm">
-          <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Tổng chênh lệch thu chi</span>
-          <h3 className="text-2xl font-black mt-1 text-slate-50">
+        <div className="col-span-2 p-6 bg-blue-100/40 dark:bg-blue-950/20 text-slate-800 dark:text-slate-100 rounded-2xl border border-blue-200/60 dark:border-blue-900/40 shadow-xs">
+          <span className="text-[10px] text-blue-500 dark:text-blue-400 font-bold uppercase tracking-wider block">Tổng chênh lệch thu chi</span>
+          <h3 className="text-2xl font-black mt-1 text-slate-900 dark:text-slate-50">
             {netBalance >= 0 ? '+' : ''}{formatVND(netBalance)}
           </h3>
           
-          <div className="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-slate-800 text-xs text-slate-400 font-semibold">
+          <div className="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-blue-200/60 dark:border-blue-900/30 text-xs text-slate-500 dark:text-slate-400 font-semibold">
             <div>
               <span>Tổng nhận (+): </span>
-              <strong className="text-emerald-400 block text-sm mt-0.5 font-black">{formatVND(totalReceived)}</strong>
+              <strong className="text-emerald-600 dark:text-emerald-400 block text-sm mt-0.5 font-black">{formatVND(totalReceived)}</strong>
             </div>
             <div>
               <span>Tổng chi (-): </span>
-              <strong className="text-rose-400 block text-sm mt-0.5 font-black">{formatVND(totalGiven)}</strong>
+              <strong className="text-rose-600 dark:text-rose-450 block text-sm mt-0.5 font-black">{formatVND(totalGiven)}</strong>
             </div>
           </div>
         </div>
 
         {/* Counts indicators */}
-        <div className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-          <span className="text-[10px] text-slate-400 font-bold block uppercase tracking-wider">Đã đi đám (Hoàn thành)</span>
-          <strong className="text-xl font-black text-slate-800 dark:text-slate-200 block mt-1">{totalEventsAttended} sự kiện</strong>
+        <div className="p-5 bg-purple-50/50 dark:bg-purple-950/20 rounded-2xl border border-purple-200/50 dark:border-purple-900/30 shadow-xs">
+          <span className="text-[10px] text-purple-500 dark:text-purple-400 font-bold block uppercase tracking-wider">Đã đi đám (Hoàn thành)</span>
+          <strong className="text-xl font-black text-purple-900 dark:text-purple-300 block mt-1">{totalEventsAttended} sự kiện</strong>
         </div>
 
-        <div className="p-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-          <span className="text-[10px] text-slate-400 font-bold block uppercase tracking-wider">Thiệp chờ phản hồi</span>
-          <strong className="text-xl font-black text-amber-500 block mt-1">{totalPendingInvitations} thiệp</strong>
+        <div className="p-5 bg-amber-50/50 dark:bg-amber-950/20 rounded-2xl border border-amber-200/50 dark:border-amber-900/30 shadow-xs">
+          <span className="text-[10px] text-amber-600 dark:text-amber-450 font-bold block uppercase tracking-wider">Thiệp chờ phản hồi</span>
+          <strong className="text-xl font-black text-amber-700 dark:text-amber-300 block mt-1">{totalPendingInvitations} thiệp</strong>
         </div>
       </div>
 
       {/* MONTHLY BAR CHART */}
-      <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+      <div className="bg-indigo-50/50 dark:bg-indigo-950/20 p-6 rounded-2xl border border-indigo-200/50 dark:border-indigo-900/30 shadow-xs space-y-4">
         <div className="flex justify-between items-center">
-          <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
-            <BarChart2 className="w-4 h-4 text-slate-500" />
+          <h3 className="text-xs font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-widest flex items-center gap-1.5">
+            <BarChart2 className="w-4 h-4 text-indigo-500" />
             Biến động tiền mừng năm {selectedYear}
           </h3>
           
           <div className="flex gap-3 text-[10px] font-bold">
-            <span className="flex items-center gap-1 text-emerald-500">
+            <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-450">
               <span className="w-2.5 h-2.5 bg-emerald-500 rounded-xs"></span> Nhận
             </span>
-            <span className="flex items-center gap-1 text-rose-500">
+            <span className="flex items-center gap-1 text-rose-600 dark:text-rose-450">
               <span className="w-2.5 h-2.5 bg-rose-500 rounded-xs"></span> Chi (Mừng)
             </span>
           </div>
         </div>
 
         {/* Custom HTML/SVG Bar Chart */}
-        <div className="h-52 flex items-end justify-between gap-1.5 pt-4 border-b border-slate-200 dark:border-slate-800 pb-1">
+        <div className="h-52 flex items-end justify-between gap-1.5 pt-4 border-b border-indigo-200/30 dark:border-indigo-900/20 pb-1">
           {monthlyData.map((m) => {
             const receivedHeight = (m.received / maxMonthlyValue) * 100;
             const givenHeight = (m.given / maxMonthlyValue) * 100;
@@ -264,7 +264,7 @@ export default function StatisticsView({ data }: StatisticsViewProps) {
               <div key={m.month} className="flex-1 flex flex-col items-center h-full group relative">
                 {/* Tooltip on Hover */}
                 <div className="absolute bottom-full mb-1 opacity-0 group-hover:opacity-100 bg-slate-900 text-white text-[9px] p-2 rounded-xl pointer-events-none transition-all z-20 shadow-md w-28 text-center border border-slate-800">
-                  <p className="font-bold text-slate-450">Tháng {m.month}</p>
+                  <p className="font-bold text-slate-400 font-display">Tháng {m.month}</p>
                   <p className="text-emerald-400">Nhận: {formatVND(m.received)}</p>
                   <p className="text-rose-400">Mừng: {formatVND(m.given)}</p>
                 </div>
@@ -284,7 +284,7 @@ export default function StatisticsView({ data }: StatisticsViewProps) {
                 </div>
 
                 {/* Label */}
-                <span className="text-[10px] text-slate-400 mt-2.5 font-bold">{m.name}</span>
+                <span className="text-[10px] text-slate-450 dark:text-slate-405 mt-2.5 font-bold">{m.name}</span>
               </div>
             );
           })}
@@ -294,9 +294,9 @@ export default function StatisticsView({ data }: StatisticsViewProps) {
       {/* BREAKDOWN PIE BARS */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Spending by Event Type */}
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-          <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
-            <PieIcon className="w-4 h-4 text-slate-500" />
+        <div className="bg-pink-50/50 dark:bg-pink-950/20 p-6 rounded-2xl border border-pink-200/50 dark:border-pink-900/30 shadow-xs space-y-4">
+          <h3 className="text-xs font-black text-pink-600 dark:text-pink-400 uppercase tracking-widest flex items-center gap-1.5">
+            <PieIcon className="w-4 h-4 text-pink-500" />
             Chi tiêu theo loại sự kiện
           </h3>
 
@@ -306,12 +306,12 @@ export default function StatisticsView({ data }: StatisticsViewProps) {
                 <div key={idx} className="space-y-1.5">
                   <div className="flex justify-between text-xs font-semibold">
                     <span className="font-bold text-slate-700 dark:text-slate-300">{item.label}</span>
-                    <span className="text-slate-400 font-bold">{formatVND(item.amount)} ({item.percentage.toFixed(0)}%)</span>
+                    <span className="text-pink-600 dark:text-pink-400 font-bold">{formatVND(item.amount)} ({item.percentage.toFixed(0)}%)</span>
                   </div>
-                  <div className="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden border border-slate-200/20 dark:border-slate-800/20">
+                  <div className="w-full bg-pink-150/40 dark:bg-pink-950/30 h-1.5 rounded-full overflow-hidden border border-pink-200/20 dark:border-pink-900/20">
                     <div 
                       style={{ width: `${item.percentage}%` }}
-                      className="bg-rose-500 h-full rounded-full transition-all duration-500"
+                      className="bg-pink-500 h-full rounded-full transition-all duration-500"
                     ></div>
                   </div>
                 </div>
@@ -323,9 +323,9 @@ export default function StatisticsView({ data }: StatisticsViewProps) {
         </div>
 
         {/* Spending by Relationship */}
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-          <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
-            <Users className="w-4 h-4 text-slate-500" />
+        <div className="bg-teal-50/50 dark:bg-teal-950/20 p-6 rounded-2xl border border-teal-200/50 dark:border-teal-900/30 shadow-xs space-y-4">
+          <h3 className="text-xs font-black text-teal-600 dark:text-teal-400 uppercase tracking-widest flex items-center gap-1.5">
+            <Users className="w-4 h-4 text-teal-500" />
             Chi tiêu theo mối quan hệ
           </h3>
 
@@ -335,12 +335,12 @@ export default function StatisticsView({ data }: StatisticsViewProps) {
                 <div key={idx} className="space-y-1.5">
                   <div className="flex justify-between text-xs font-semibold">
                     <span className="font-bold text-slate-700 dark:text-slate-300">{item.label}</span>
-                    <span className="text-slate-400 font-bold">{formatVND(item.amount)} ({item.percentage.toFixed(0)}%)</span>
+                    <span className="text-teal-600 dark:text-teal-400 font-bold">{formatVND(item.amount)} ({item.percentage.toFixed(0)}%)</span>
                   </div>
-                  <div className="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden border border-slate-200/20 dark:border-slate-800/20">
+                  <div className="w-full bg-teal-150/40 dark:bg-teal-950/30 h-1.5 rounded-full overflow-hidden border border-teal-200/20 dark:border-teal-900/20">
                     <div 
                       style={{ width: `${item.percentage}%` }}
-                      className="bg-emerald-500 h-full rounded-full transition-all duration-500"
+                      className="bg-teal-500 h-full rounded-full transition-all duration-500"
                     ></div>
                   </div>
                 </div>
@@ -353,14 +353,14 @@ export default function StatisticsView({ data }: StatisticsViewProps) {
       </div>
 
       {/* TOP GIVERS LEADERBOARD */}
-      <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
-          <Award className="w-4 h-4 text-slate-500" />
+      <div className="bg-emerald-50/50 dark:bg-emerald-950/20 p-6 rounded-2xl border border-emerald-200/50 dark:border-emerald-900/30 shadow-xs space-y-4">
+        <h3 className="text-xs font-black text-emerald-600 dark:text-emerald-450 uppercase tracking-widest flex items-center gap-1.5">
+          <Award className="w-4 h-4 text-emerald-500" />
           Những người đã mừng nhiều nhất (Top khách quý)
         </h3>
 
         {topGivers.length > 0 ? (
-          <div className="divide-y divide-slate-200 dark:divide-slate-800/60">
+          <div className="divide-y divide-emerald-200/40 dark:divide-emerald-900/30">
             {topGivers.map((giver, idx) => {
               const badges = ['🥇', '🥈', '🥉', '🎖️', '🎖️'];
               return (
@@ -369,7 +369,7 @@ export default function StatisticsView({ data }: StatisticsViewProps) {
                     <span className="text-lg">{badges[idx]}</span>
                     <div>
                       <strong className="text-slate-800 dark:text-slate-100 font-extrabold">{giver.name}</strong>
-                      <span className="text-[10px] text-slate-400 font-semibold block">{giver.relation} • {giver.count} lần mừng</span>
+                      <span className="text-[10px] text-slate-450 dark:text-slate-400 font-semibold block">{giver.relation} • {giver.count} lần mừng</span>
                     </div>
                   </div>
                   <strong className="text-slate-800 dark:text-slate-100 font-black">{formatVND(giver.amount)}</strong>
@@ -384,9 +384,9 @@ export default function StatisticsView({ data }: StatisticsViewProps) {
 
       {/* LIST OF OUTSTANDING RETURNS */}
       {outstandingGifts.length > 0 && (
-        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-          <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
-            <AlertTriangle className="w-4 h-4 text-slate-500" />
+        <div className="bg-rose-50/50 dark:bg-rose-950/20 p-6 rounded-2xl border border-rose-200/50 dark:border-rose-900/30 shadow-xs space-y-4">
+          <h3 className="text-xs font-black text-rose-600 dark:text-rose-400 uppercase tracking-widest flex items-center gap-1.5">
+            <AlertTriangle className="w-4 h-4 text-rose-500" />
             Các khoản chưa mừng lại ({outstandingGifts.length})
           </h3>
 
@@ -394,11 +394,11 @@ export default function StatisticsView({ data }: StatisticsViewProps) {
             {outstandingGifts.map((item, idx) => (
               <div 
                 key={idx}
-                className="p-3.5 bg-rose-50/50 dark:bg-rose-950/20 rounded-xl border border-rose-200/50 dark:border-rose-900/50 flex justify-between items-center text-xs shadow-xs"
+                className="p-3.5 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-rose-200/40 dark:border-rose-900/40 flex justify-between items-center text-xs shadow-xs"
               >
                 <div>
                   <strong className="text-slate-800 dark:text-slate-100 font-extrabold">{item.name}</strong>
-                  <span className="text-[10px] text-slate-400 font-semibold block">Từng mừng cho: {item.event} ({item.date.split('-').reverse().join('/')})</span>
+                  <span className="text-[10px] text-slate-450 dark:text-slate-400 font-semibold block">Từng mừng cho: {item.event} ({item.date.split('-').reverse().join('/')})</span>
                 </div>
                 <div className="text-right">
                   <span className="font-extrabold text-rose-600 dark:text-rose-400 block">{formatVND(item.amount)}</span>

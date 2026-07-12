@@ -426,21 +426,21 @@ Quản lý tiền mừng chu đáo với ứng dụng Sổ Thiệp Mời.
       </div>
 
       {/* THEME SELECTOR & PIN LOCK */}
-      <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest">Hệ thống & Bảo mật</h3>
+      <div className="bg-teal-50/50 dark:bg-teal-950/20 p-6 rounded-2xl border border-teal-200/50 dark:border-teal-900/30 shadow-xs space-y-4 animate-in fade-in duration-300">
+        <h3 className="text-xs font-black text-teal-600 dark:text-teal-400 uppercase tracking-widest">Hệ thống & Bảo mật</h3>
         
         {/* Theme select */}
         <div className="flex justify-between items-center text-xs">
           <div>
             <strong className="text-slate-700 dark:text-slate-300 block text-sm font-bold">Giao diện màu sắc</strong>
-            <span className="text-slate-400 block mt-0.5 font-semibold">Lựa chọn tông màu sáng tối</span>
+            <span className="text-slate-450 block mt-0.5 font-semibold">Lựa chọn tông màu sáng tối</span>
           </div>
 
-          <div className="flex gap-1.5 p-1 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl">
+          <div className="flex gap-1.5 p-1 bg-white/60 dark:bg-teal-950/45 border border-teal-200/40 dark:border-teal-900/40 rounded-xl">
             <button
               onClick={() => handleThemeChange('light')}
               className={`px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer text-[11px] font-bold ${
-                settings.theme === 'light' ? 'bg-white dark:bg-slate-900 text-rose-500 shadow-xs' : 'text-slate-400'
+                settings.theme === 'light' ? 'bg-teal-100/90 dark:bg-teal-900/60 text-teal-950 dark:text-teal-50 shadow-xs' : 'text-slate-500 dark:text-slate-400'
               }`}
               title="Chế độ Sáng"
             >
@@ -450,7 +450,7 @@ Quản lý tiền mừng chu đáo với ứng dụng Sổ Thiệp Mời.
             <button
               onClick={() => handleThemeChange('dark')}
               className={`px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer text-[11px] font-bold ${
-                settings.theme === 'dark' ? 'bg-white dark:bg-slate-900 text-rose-455 shadow-xs' : 'text-slate-400'
+                settings.theme === 'dark' ? 'bg-teal-100/90 dark:bg-teal-900/60 text-teal-950 dark:text-teal-50 shadow-xs' : 'text-slate-500 dark:text-slate-400'
               }`}
               title="Chế độ Tối"
             >
@@ -460,7 +460,7 @@ Quản lý tiền mừng chu đáo với ứng dụng Sổ Thiệp Mời.
             <button
               onClick={() => handleThemeChange('system')}
               className={`px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer text-[11px] font-bold ${
-                settings.theme === 'system' || !settings.theme ? 'bg-white dark:bg-slate-900 text-amber-500 shadow-xs' : 'text-slate-400'
+                settings.theme === 'system' || !settings.theme ? 'bg-teal-100/90 dark:bg-teal-900/60 text-teal-950 dark:text-teal-50 shadow-xs' : 'text-slate-500 dark:text-slate-400'
               }`}
               title="Theo Hệ thống"
             >
@@ -471,18 +471,18 @@ Quản lý tiền mừng chu đáo với ứng dụng Sổ Thiệp Mời.
         </div>
 
         {/* PIN lock */}
-        <div className="flex justify-between items-center text-xs pt-4 border-t border-slate-100 dark:border-slate-800/60">
+        <div className="flex justify-between items-center text-xs pt-4 border-t border-teal-200/30 dark:border-teal-900/20">
           <div>
             <strong className="text-slate-700 dark:text-slate-300 block text-sm font-bold">Khóa bảo mật ứng dụng (PIN)</strong>
-            <span className="text-slate-400 block mt-0.5 font-semibold">Nhập mã PIN khi khởi động sổ thiệp</span>
+            <span className="text-slate-450 block mt-0.5 font-semibold">Nhập mã PIN khi khởi động sổ thiệp</span>
           </div>
 
           <button
             onClick={handleTogglePin}
             className={`py-2 px-4 rounded-xl font-bold flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer text-xs ${
               settings.isPinEnabled
-                ? 'bg-rose-100 text-rose-600 dark:bg-rose-950/40 dark:text-rose-455 border border-rose-200/50'
-                : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'
+                ? 'bg-teal-200/60 text-teal-900 dark:bg-teal-950/60 dark:text-teal-300 border border-teal-300/40'
+                : 'bg-white/50 text-slate-600 dark:bg-slate-800/50 dark:text-slate-300 border border-slate-200/40 dark:border-slate-700/40'
             }`}
           >
             {settings.isPinEnabled ? (
@@ -499,20 +499,20 @@ Quản lý tiền mừng chu đáo với ứng dụng Sổ Thiệp Mời.
       </div>
 
       {/* FAMILY MODE SETTINGS */}
-      <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+      <div className="bg-indigo-50/50 dark:bg-indigo-950/20 p-6 rounded-2xl border border-indigo-200/50 dark:border-indigo-900/30 shadow-xs space-y-4">
         <div className="flex justify-between items-center">
-          <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
-            <Users className="w-4 h-4 text-slate-500" />
+          <h3 className="text-xs font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-widest flex items-center gap-1.5">
+            <Users className="w-4 h-4 text-indigo-500" />
             Chế độ gia đình (Đồng quản lý)
           </h3>
           
           {/* Toggle family mode */}
           <button
             onClick={handleToggleFamilyMode}
-            className={`px-3 py-1.5 text-[10px] font-black rounded-lg transition-all cursor-pointer border border-slate-200 dark:border-slate-800 shadow-xs bg-slate-50 dark:bg-slate-950 ${
+            className={`px-3 py-1.5 text-[10px] font-black rounded-lg transition-all cursor-pointer border shadow-xs ${
               settings.familyModeEnabled
-                ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-455 border-emerald-200 dark:border-emerald-900'
-                : 'text-slate-400'
+                ? 'bg-indigo-200/60 text-indigo-900 dark:bg-indigo-950/60 dark:text-indigo-300 border-indigo-300/45'
+                : 'bg-white/50 text-slate-500 dark:bg-slate-800/50 dark:text-slate-400 border-slate-200/40 dark:border-slate-700/40'
             }`}
           >
             {settings.familyModeEnabled ? 'KÍCH HOẠT' : 'CHƯA BẬT'}
@@ -607,9 +607,9 @@ Quản lý tiền mừng chu đáo với ứng dụng Sổ Thiệp Mời.
       </div>
 
       {/* EXPORTS & DATA MANAGEMENT */}
-      <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
-          <FileSpreadsheet className="w-4 h-4 text-slate-500" />
+      <div className="bg-sky-50/50 dark:bg-sky-950/20 p-6 rounded-2xl border border-sky-200/50 dark:border-sky-900/30 shadow-xs space-y-4 animate-in fade-in duration-300">
+        <h3 className="text-xs font-black text-sky-600 dark:text-sky-400 uppercase tracking-widest flex items-center gap-1.5">
+          <FileSpreadsheet className="w-4 h-4 text-sky-500" />
           Nhập xuất & Lưu trữ dữ liệu
         </h3>
 
@@ -618,13 +618,13 @@ Quản lý tiền mừng chu đáo với ứng dụng Sổ Thiệp Mời.
           <div className="grid grid-cols-2 gap-2.5">
             <button
               onClick={() => handleExportCSV('invitations')}
-              className="p-3.5 bg-slate-50 dark:bg-slate-950/40 hover:bg-slate-100 dark:hover:bg-slate-850 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 rounded-xl font-extrabold flex items-center justify-center gap-1.5 cursor-pointer text-center shadow-xs text-xs"
+              className="p-3.5 bg-white/60 dark:bg-sky-950/40 hover:bg-sky-100/60 dark:hover:bg-slate-850 text-slate-700 dark:text-slate-300 border border-sky-100 dark:border-sky-900/40 rounded-xl font-extrabold flex items-center justify-center gap-1.5 cursor-pointer text-center shadow-xs text-xs"
             >
               <Download className="w-4 h-4 text-emerald-500" /> Xuất Excel Thiệp mời
             </button>
             <button
               onClick={() => handleExportCSV('transactions')}
-              className="p-3.5 bg-slate-50 dark:bg-slate-950/40 hover:bg-slate-100 dark:hover:bg-slate-850 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 rounded-xl font-extrabold flex items-center justify-center gap-1.5 cursor-pointer text-center shadow-xs text-xs"
+              className="p-3.5 bg-white/60 dark:bg-sky-950/40 hover:bg-sky-100/60 dark:hover:bg-slate-850 text-slate-700 dark:text-slate-300 border border-sky-100 dark:border-sky-900/40 rounded-xl font-extrabold flex items-center justify-center gap-1.5 cursor-pointer text-center shadow-xs text-xs"
             >
               <Download className="w-4 h-4 text-rose-500" /> Xuất Excel Giao dịch
             </button>
@@ -632,7 +632,7 @@ Quản lý tiền mừng chu đáo với ứng dụng Sổ Thiệp Mời.
 
           {/* Import Contacts CSV */}
           <div className="pt-1">
-            <label className="p-4 w-full bg-slate-50 dark:bg-slate-950/40 hover:bg-slate-100 dark:hover:bg-slate-850 text-slate-700 dark:text-slate-300 border border-dashed border-slate-200 dark:border-slate-800 rounded-xl font-black flex items-center justify-center gap-2 cursor-pointer text-center shadow-xs text-xs">
+            <label className="p-4 w-full bg-white/40 dark:bg-sky-950/40 hover:bg-white/60 dark:hover:bg-slate-850 text-slate-700 dark:text-slate-300 border border-dashed border-sky-200/60 dark:border-sky-900/50 rounded-xl font-black flex items-center justify-center gap-2 cursor-pointer text-center shadow-xs text-xs">
               <Upload className="w-4 h-4 text-indigo-500" /> Nhập danh bạ từ file CSV/Excel
               <input
                 type="file"
@@ -642,7 +642,7 @@ Quản lý tiền mừng chu đáo với ứng dụng Sổ Thiệp Mời.
                 className="hidden"
               />
             </label>
-            <span className="text-[10px] text-slate-400 block mt-2 px-1 font-semibold">
+            <span className="text-[10px] text-slate-455 block mt-2 px-1 font-semibold">
               • Chấp nhận file CSV chứa cột "Họ tên", "Số điện thoại", "Địa chỉ", "Mối quan hệ" để thêm hàng loạt.
             </span>
           </div>
@@ -652,25 +652,25 @@ Quản lý tiền mừng chu đáo với ứng dụng Sổ Thiệp Mời.
             <button
               type="button"
               onClick={handlePrintPDF}
-              className="p-3.5 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:opacity-90 rounded-full font-bold flex items-center justify-center gap-1.5 cursor-pointer text-xs shadow-sm transition-all"
+              className="p-3.5 bg-sky-900 dark:bg-sky-100 text-white dark:text-sky-900 hover:opacity-90 rounded-full font-bold flex items-center justify-center gap-1.5 cursor-pointer text-xs shadow-xs transition-all"
             >
               <FileText className="w-4 h-4 text-amber-500" /> Xuất báo cáo PDF / In sổ
             </button>
             <button
               type="button"
               onClick={handleShareClipboard}
-              className="p-3.5 bg-amber-700 text-white hover:bg-amber-800 rounded-full font-bold flex items-center justify-center gap-1.5 cursor-pointer text-xs shadow-sm transition-all"
+              className="p-3.5 bg-amber-700 text-white hover:bg-amber-800 rounded-full font-bold flex items-center justify-center gap-1.5 cursor-pointer text-xs shadow-xs transition-all"
             >
               <Share2 className="w-4 h-4" /> Chia sẻ Zalo / SMS
             </button>
           </div>
 
           {/* Full Database Backup & Restore JSON */}
-          <div className="pt-4 border-t border-notebook-border dark:border-notebook-dark-border flex flex-col sm:flex-row gap-2.5">
+          <div className="pt-4 border-t border-sky-200/40 dark:border-sky-900/30 flex flex-col sm:flex-row gap-2.5">
             <button
               type="button"
               onClick={handleExportBackup}
-              className="flex-1 py-3 px-3 bg-notebook-panel dark:bg-notebook-dark-panel text-slate-700 dark:text-slate-300 hover:bg-notebook-border/50 dark:hover:bg-slate-750 font-bold rounded-full flex items-center justify-center gap-1.5 cursor-pointer text-xs transition-all border border-notebook-border dark:border-notebook-dark-border"
+              className="flex-1 py-3 px-3 bg-white/50 dark:bg-sky-950/30 text-slate-700 dark:text-slate-300 hover:bg-sky-100/40 dark:hover:bg-slate-750 font-bold rounded-full flex items-center justify-center gap-1.5 cursor-pointer text-xs transition-all border border-sky-200/30 dark:border-sky-900/30"
             >
               <Download className="w-3.5 h-3.5" /> Sao lưu JSON
             </button>
@@ -683,7 +683,7 @@ Quản lý tiền mừng chu đáo với ứng dụng Sổ Thiệp Mời.
               <Download className="w-3.5 h-3.5" /> Xuất file ZIP (Infinity)
             </button>
 
-            <label className="flex-1 py-3 px-3 bg-notebook-panel dark:bg-notebook-dark-panel text-slate-700 dark:text-slate-300 hover:bg-notebook-border/50 dark:hover:bg-slate-750 font-bold rounded-full flex items-center justify-center gap-1.5 cursor-pointer text-center text-xs transition-all border border-notebook-border dark:border-notebook-dark-border">
+            <label className="flex-1 py-3 px-3 bg-white/50 dark:bg-sky-950/30 text-slate-700 dark:text-slate-300 hover:bg-sky-100/40 dark:hover:bg-slate-750 font-bold rounded-full flex items-center justify-center gap-1.5 cursor-pointer text-center text-xs transition-all border border-sky-200/30 dark:border-sky-900/30">
               <Upload className="w-3.5 h-3.5" /> Khôi phục JSON
               <input
                 type="file"
@@ -698,8 +698,8 @@ Quản lý tiền mừng chu đáo với ứng dụng Sổ Thiệp Mời.
       </div>
 
       {/* RESET APP DATA */}
-      <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-rose-100 dark:border-rose-950/30 shadow-sm space-y-4">
-        <h3 className="text-xs font-black text-rose-500 uppercase tracking-widest flex items-center gap-1.5">
+      <div className="bg-rose-50/50 dark:bg-rose-950/20 p-6 rounded-2xl border border-rose-200/50 dark:border-rose-900/30 shadow-xs space-y-4 animate-in fade-in duration-300">
+        <h3 className="text-xs font-black text-rose-600 dark:text-rose-450 uppercase tracking-widest flex items-center gap-1.5">
           <RefreshCw className="w-4 h-4" />
           Khôi phục cài đặt gốc & Xóa sạch dữ liệu
         </h3>

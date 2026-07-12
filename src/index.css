@@ -287,6 +287,17 @@ html:not(.dark) main :is(input, select, textarea):not(.bg-rose-500):not(.bg-emer
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
 
+/* Solid non-translucent option dropdown styles to prevent black on black background bugs in light mode */
+html:not(.dark) option {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+.dark option {
+  background-color: #1e293b !important;
+  color: #f1f5f9 !important;
+}
+
 html:not(.dark) main :is(input, select, textarea):focus {
   background: rgba(255, 255, 255, 0.8) !important;
   border-color: rgba(244, 63, 94, 0.4) !important; /* soft rose focus ring */
