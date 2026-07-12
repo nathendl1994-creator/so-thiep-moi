@@ -271,6 +271,37 @@ html:not(.dark) :is(span, p, div, h1, h2, h3, h4, h5, h6, label, input, textarea
   --tw-text-opacity: 1 !important;
 }
 
+/* Universal translucent/glassmorphic overrides for elements inside the main tab view content area in light mode */
+html:not(.dark) main :is(.bg-white, .bg-slate-50, .bg-slate-100/70, .bg-slate-100, .bg-slate-50/50, .bg-\[\#F6F5EE\]\/40):not(.bg-rose-500):not(.bg-emerald-600):not(.bg-emerald-500):not(.bg-blue-600):not(.bg-red-500):not(.bg-amber-600):not(.bg-purple-600):not(.bg-slate-900):not(.bg-black) {
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(24px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.02),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Maintain soft translucent input/select styling in light mode */
+html:not(.dark) main :is(input, select, textarea):not(.bg-rose-500):not(.bg-emerald-600):not(.bg-emerald-500):not(.bg-blue-600):not(.bg-red-500):not(.bg-amber-600):not(.bg-purple-600):not(.bg-slate-900):not(.bg-black) {
+  background: rgba(255, 255, 255, 0.45) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+html:not(.dark) main :is(input, select, textarea):focus {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-color: rgba(244, 63, 94, 0.4) !important; /* soft rose focus ring */
+  box-shadow: 0 0 0 4px rgba(244, 63, 94, 0.1) !important;
+}
+
+/* Smooth and elegant hover effect for list cards on other tabs in light mode */
+html:not(.dark) main :is(.bg-white, .bg-slate-50):not(.bg-rose-500):not(.bg-emerald-600):not(.bg-emerald-500):not(.bg-blue-600):not(.bg-red-500):not(.bg-amber-600):not(.bg-purple-600):not(.bg-slate-900):not(.bg-black):hover {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border-color: rgba(244, 63, 94, 0.25) !important;
+}
+
 /* Specific main heading size and weight adjustments for premium typography hierarchy */
 html:not(.dark) h1,
 html:not(.dark) .h1-primary {
